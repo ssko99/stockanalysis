@@ -1,0 +1,79 @@
+<div class="panel-group">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3>{{pageTitle}} {{errorMessage}}</h3>
+    </div>
+    <div class="panel-body">
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let note of notes" (click)="selectNote(note)" [class.active]="note === currentNote">
+          {{note.ticker}} - {{note.description}}
+        </li>
+      </ul>
+      <button class="btn btn-default btn-success" style="width:180px;" (click)="createNewNote()">Add New Note</button>
+    </div>
+    <div class="panel-footer ">
+      <a class="btn btn-default " [routerLink]="[ '/products'] ">
+        <i class="glyphicon glyphicon-chevron-left "></i> Back
+      </a>
+    </div>
+  </div>
+  <br/>
+  <div class="panel panel-info" *ngIf="currentNote">
+    <div class="panel-heading">
+      <h3 *ngIf="currentNote._id">Note Details</h3>
+      <h3 *ngIf="!currentNote._id">Create New Note</h3>
+    </div>
+    <div class="panel-body">
+      <form nonvalidate class="col-md-12" #formCtrl='ngForm'>
+        <div class="form-group">
+          <label for="ticker">Ticker  (Required)</label>
+          <input class="form-control" type="text" name="ticker" #ticker='ngModel' [(ngModel)]="currentNote.ticker" required pattern="^[A-Za-z]+$"
+            placeholder="Enter Ticker" />
+          <ul class='text-danger list-unstyled' *ngIf='ticker.dirty && ticker.invalid'>
+            <li *ngIf='ticker.errors.required'>You must enter a ticker symbol.</li>
+            <li *ngIf='ticker.errors.pattern'>Ticker symbol can only contain letters.</li>
+          </ul>
+        </div>
+        <div class="form-group">
+          <label for="buysell">BuySell Recomendation</label>
+          <!--<input class="form-control" type="text" name="buysell" [(ngModel)]="currentNote.buysell" placeholder="buy or sell" />-->
+          <pre class="card card-block card-header">{{currentNote.buysell|| null}}</pre>
+          <div class="btn-group">
+            <label class="btn btn-primary" [(ngModel)]="currentNote.buysell" name="buysell" btnRadio="Buy">Buy</label>
+            <label class="btn btn-primary" [(ngModel)]="currentNote.buysell" name="buysell" btnRadio="Sell">Sell</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="target">Target Price</label>
+          <input class="form-control" type="text" name="target" [(ngModel)]="currentNote.target" />
+        </div>
+        <div class="form-group">
+          <label for="rating">Analyst Rating</label>
+          <div>
+            <rating [(ngModel)]="currentNote.rating" name="rating" [max]="maxRating" [readonly]="isReadonly"></rating>
+          </div>
+          <div class="card">
+            <pre class="card-block card-header" style="margin:15px 0;">Rate: <b>{{currentNote.rating}}</b> </pre>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="entrydate">Entry Date</label>
+          <div class="card">
+            <pre class="card-block card-header">Selected date is: <em>{{ currentNote.entryDate | date:'fullDate'}}</em></pre>
+          </div>
+          <div style="min-height:290px;">
+            <datepicker [(ngModel)]="currentNote.entryDate" name="entrydate" [showWeeks]="false" [dateDisabled]="dateDisabled"></datepicker>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea class="form-control" placeholder="Description" rows=3 [(ngModel)]="currentNote.description" name="description ">
+                            </textarea>
+        </div>
+        <button class="btn btn-primary" [disabled]="!formCtrl.form.valid" *ngIf="!currentNote._id " (click)="createNote() ">Create</button>
+        <button class="btn btn-info" [disabled]="!formCtrl.form.valid" *ngIf="currentNote._id " (click)="updateNote()">Update</button>
+        <button class="btn btn-danger" [disabled]="!formCtrl.form.valid" *ngIf="currentNote._id " (click)="deleteNote() ">Delete</button>
+      </form>
+    </div>
+  </div>
+</div>

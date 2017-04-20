@@ -1,0 +1,86 @@
+<div class="panel-group">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      {{pageTitle}}
+    </div>
+    <div class="panel-body">
+      <ng2-smart-table (userRowSelect)='rowSelected($event)' [settings]="settings" [source]="source"></ng2-smart-table>
+    </div>
+  </div>
+  <div class="panel panel-success" *ngIf="loadDetail">
+    <div class="panel-heading">
+      Stock Details
+    </div>
+    <div class="panel-body">
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-3">Name:</div>
+          <div class="col-md-6">{{stockDetail.Name}}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">Price:</div>
+          <div class="col-md-6">{{stockDetail.Price|currency:"USD":true }}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">Divident Yield:</div>
+          <div class="col-md-6">{{stockDetail['Dividend Yield']|currency:"USD":true}}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">Price/Earnings:</div>
+          <div class="col-md-6">{{stockDetail["Price/Earnings"]|currency:"USD":true}}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">Earnings/Share:</div>
+          <div class="col-md-6">{{stockDetail["Earnings/Share"]|currency:"USD":true}}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">Book Value:</div>
+          <div class="col-md-6">
+            {{stockDetail["Book Value"]|currency:"USD":true}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">SEC Filings:</div>
+          <div class="col-md-6"><a target="_blank">{{stockDetail["SEC Filings"]}}</a></div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-3">Sector:</div>
+          <div class="col-md-6">{{stockDetail["Sector"] }}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">52 week low:</div>
+          <div class="col-md-6">{{stockDetail["52 week low"]|currency:"USD":true }}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">52 week high:</div>
+          <div class="col-md-6">{{stockDetail["52 week high"]|currency:"USD":true }}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">Market Cap:</div>
+          <div class="col-md-6">{{stockDetail["Market Cap"]|currency:"USD":true }}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">EBITDA:</div>
+          <div class="col-md-6">{{stockDetail.EBITDA|currency:"USD":true }}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">Price/Sales:</div>
+          <div class="col-md-6">{{stockDetail["Price/Sales"]|currency:"USD":true }}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">Price/Book:</div>
+          <div class="col-md-6">{{stockDetail["Price/Book"]|currency:"USD":true }}</div>
+        </div>
+      </div>
+    </div>
+    <div class="panel-footer">
+      <a class="btn btn-primary" style="width:180px;margin-left:10px" [routerLink]="['/products', stockDetail.Symbol]">
+           Research {{stockDetail.Symbol}}
+        </a>
+      <a class="btn btn-primary" style="width:180px;margin-left:10px" [routerLink]="['/charts', stockDetail.Symbol]">
+           Chart {{stockDetail.Symbol}}
+        </a>
+    </div>
+  </div>

@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col-md-12">
+    <div style="display: block;">
+      <canvas baseChart [labels]="lineChartLabels" [datasets]="lineChartData" [options]="lineChartOptions" [colors]="lineChartColors"
+        [legend]="lineChartLegend" [chartType]="lineChartType">
+      </canvas>
+    </div>
+  </div>
+  <br/>
+  <div class="row">
+    <div class="col-md-12 " style="margin-bottom: 10px; margin-top:20px">
+      <table class="table table-responsive table-condensed">
+        <tr *ngFor="let d of lineChartData">
+          <td *ngFor="let label of lineChartLabels; let j=index">{{j+1}}</td>
+        </tr>
+        <tr>
+          <th *ngFor="let label of lineChartLabels">{{label}}</th>
+        </tr>
+        <tr *ngFor="let d of lineChartData">
+          <td *ngFor="let label of lineChartLabels; let j=index">{{d && d.data[j]}}</td>
+        </tr>
+      </table>
+      <a class="btn btn-default btn-info" [routerLink]="['/products']">
+        <i class="glyphicon glyphicon-chevron-left"></i> Back
+      </a>
+      <form class="form-inline">
+        <div class="form-group">
+          <input class="form-control" type="text" name="searchTicker" style="width:180px" placeholder='Enter Ticker' autofocus #searchTicker>
+          <button class="btn btn-info" style="width:180px;margin:10px" (click)="displayQuote(searchTicker.value)">
+                Enter Search Symbol 
+                </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

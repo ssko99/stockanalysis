@@ -1,0 +1,215 @@
+<div class="panel panel-primary">
+    <div class="panel-heading" style="font-size:large">
+        {{pageTitle + " : " + security.Name}}
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <form class="form-inline">
+                <div class="form-group">
+                    <input class="form-control" type="text" name="searchTicker" style="width:180px;margin-left:10px" placeholder='Enter Ticker'
+                        autofocus #searchTicker>
+                    <button class="btn btn-info" style="width:180px;margin:10px" (click)="getStock(searchTicker.value)">
+                Enter Search Symbol 
+                </button>
+                </div>
+            </form>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-4">Symbol:</div>
+                    <div class="col-md-6">{{security.symbol}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">Bid:</div>
+                    <div class="col-md-6">{{security.Bid|currency:"USD":true}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">Ask:</div>
+                    <div class="col-md-6">{{security.Ask|currency:"USD":true}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">Average Daily Volume:</div>
+                    <div class="col-md-6">{{security.AverageDailyVolume| number}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">Price Change:</div>
+                    <div class="col-md-6">{{security.Change|currency:"USD":true}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">Earnings per Share:</div>
+                    <div class="col-md-6">{{security.EarningsShare|currency:"USD":true}}</div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-4">Days Low:</div>
+                    <div class="col-md-6">{{security.DaysLow|currency:"USD":true}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">Days High:</div>
+                    <div class="col-md-6">{{security.DaysHigh|currency:"USD":true}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">Year Low:</div>
+                    <div class="col-md-6">{{security.YearLow|currency:"USD":true}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">Year High:</div>
+                    <div class="col-md-6">{{security.YearHigh|currency:"USD":true}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">Dividend per Share:</div>
+                    <div class="col-md-6">{{security.DividendShare|currency:"USD":true}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">Book Value:</div>
+                    <div class="col-md-6">{{security.BookValue|currency:"USD":true}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel-footer">
+
+        <a class="btn btn-default" [routerLink]="['/products']">
+            <i class="glyphicon glyphicon-chevron-left"></i> Back
+        </a>
+        <a class="btn btn-primary" style="width:180px;margin-left:10px" [routerLink]="['/charts', security.symbol]">
+           Chart {{security.symbol}}
+        </a>
+    </div>
+</div>
+<div class="row">
+
+    <div class="col-md-3">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Market Capitalization</div>
+            <div class="panel-body">{{security.MarketCapitalization}}</div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="panel panel-primary">
+            <div class="panel-heading">EPS Estimate CurrentYear</div>
+            <div class="panel-body">{{security.EPSEstimateCurrentYear|currency:"USD":true}}</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="panel panel-primary">
+            <div class="panel-heading">EPS Estimate NextYear</div>
+            <div class="panel-body">{{security.EPSEstimateNextYear|currency:"USD":true}}</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="panel panel-primary">
+            <div class="panel-heading">EPS Estimate Next Quarter</div>
+            <div class="panel-body">{{security.EPSEstimateNextQuarter|currency:"USD":true}}</div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-3">
+        <div class="panel panel-primary">
+            <div class="panel-heading">EBITDA</div>
+            <div class="panel-body">{{security.EBITDA}}</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Change From Year Low</div>
+            <div class="panel-body">{{security.ChangeFromYearLow|currency:"USD":true}}</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Change From Year High</div>
+            <div class="panel-body">{{security.ChangeFromYearHigh|currency:"USD":true}}</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Short Ratio</div>
+            <div class="panel-body">{{security.ShortRatio}}</div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <div class="panel panel-primary">
+            <div class="panel-heading">PE Ratio</div>
+            <div class="panel-body">{{security.PERatio}}</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Price Sales</div>
+            <div class="panel-body">{{security.PriceSales|currency:"USD":true}}</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Price Book</div>
+            <div class="panel-body">{{security.PriceBook|currency:"USD":true}}</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="panel panel-primary">
+            <div class="panel-heading">PEG Ratio</div>
+            <div class="panel-body">{{security.PEGRatio}}</div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <div class="panel panel-primary">
+            <div class="panel-heading">One year Target Price</div>
+            <div class="panel-body">{{security.OneyrTargetPrice|currency:"USD":true}}</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Dividend Yield</div>
+            <div class="panel-body">{{security.DividendYield}}</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Dividend Pay Date</div>
+            <div class="panel-body">{{security.DividendPayDate}}</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Ex Dividend Date</div>
+            <div class="panel-body">{{security.ExDividendDate}}</div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Fifty day Moving Average</div>
+            <div class="panel-body">{{security.FiftydayMovingAverage}}</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Two Hundred day Moving Average</div>
+            <div class="panel-body">{{security.TwoHundreddayMovingAverage}}</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Open</div>
+            <div class="panel-body">{{security.Open}}</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Previous Close</div>
+            <div class="panel-body">{{security.PreviousClose}}</div>
+        </div>
+    </div>
+</div>
